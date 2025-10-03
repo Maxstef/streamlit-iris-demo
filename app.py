@@ -1,13 +1,5 @@
 import streamlit as st
 import pandas as pd
-import numpy as np
-import joblib
-
-def predict(sepal_l, sepal_w, petal_l, petal_w):
-    model = joblib.load('models/rf_model.joblib')
-    data = np.expand_dims(np.array([sepal_l, sepal_w, petal_l, petal_w]), axis=0)
-    predictions = model.predict(data)
-    return predictions[0]
 
 # Заголовок застосунку
 st.title('Класифікація квітів Ірису')
@@ -37,8 +29,3 @@ with col2:
     petal_l = st.slider('Довжина пелюстки (см)', 1.0, 7.0, 0.5)
     petal_w = st.slider('Ширина пелюстки (см)', 0.1, 2.5, 0.5)
 
-# Кнопка для прогнозування
-if st.button("Прогнозувати тип ірису"):
-    # Викликаємо функцію прогнозування
-    result = predict(sepal_l, sepal_w, petal_l, petal_w)
-    st.write(f"Прогнозований тип ірису: {result}")
